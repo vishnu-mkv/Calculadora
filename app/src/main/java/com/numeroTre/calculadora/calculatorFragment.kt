@@ -14,11 +14,48 @@ import kotlinx.android.synthetic.main.fragment_calculator.*
  */
 class calculatorFragment : Fragment(R.layout.fragment_calculator) {
 
+    val maxmNumLength = 10
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         BtnOne.setOnClickListener{
-            TvEquationBuffer.text = TvEquationBuffer.text.toString() + "1"
+            addToStringBuffer('1')
+        }
+
+
+    }
+
+    private fun addToStringBuffer(c: Char){
+//        add to string buffer from here
+
+        checkEmptyBuffer()
+
+        if (c.isDigit() and notExceededNumLength()){
+
+            TvEquationBuffer.text = TvEquationBuffer.text.toString() + c
+        }
+    }
+
+    private fun notExceededNumLength(): Boolean {
+//        To stop user entering very long numbers
+
+        val buffer = TvEquationBuffer.text.toString()
+        var digitCount = 0
+
+
+        for (i in buffer.reversed()){
+            if(i.isDigit()) digitCount++
+            else break
+        }
+        return digitCount<maxmNumLength
+    }
+
+    private fun checkEmptyBuffer(){
+//        To remove the preset zero
+
+        if (TvEquationBuffer.text.toString() == "0"){
+            TvEquationBuffer.text = ""
         }
     }
 }

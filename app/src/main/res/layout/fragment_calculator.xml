@@ -33,7 +33,7 @@
             android:paddingTop="10dp"
             android:paddingRight="5dp"
             android:paddingBottom="10dp"
-            android:text="543265372154721645467545"
+            android:text="0"
             android:textAlignment="textEnd"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -248,7 +248,7 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/ButtonOne"
+                android:id="@+id/BtnOne"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

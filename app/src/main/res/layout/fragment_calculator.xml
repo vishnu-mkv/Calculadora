@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="2"
     app:layout_anchorGravity="center"
-    tools:context=".calculatorFragment">
+    tools:context=".CalculatorFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/LLinputs"
@@ -20,6 +20,8 @@
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:textAlignment="textEnd"
             app:layout_constraintBottom_toTopOf="@+id/TvEquationBuffer"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,16 +32,31 @@
             android:id="@+id/TvEquationBuffer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:text="0"
             android:textAlignment="textEnd"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvLiveResult"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <TextView
+            android:id="@+id/tvLiveResult"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/light_black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
@@ -77,7 +94,7 @@
                 app:cornerRadius="0dp" />
 
             <Button
-                android:id="@+id/ButtonCloseBracket"
+                android:id="@+id/BtnCloseBracket"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

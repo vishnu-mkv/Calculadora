@@ -5,13 +5,19 @@ class EquationSolver(private val equation: String) {
     private var expressionList = mutableListOf<String>()
 
     init {
-        expressionList = """(?<=^|[-*+/(])[+-]\d+\.\d+E?\d+|(?<=^|[-*+/(])[+-]\d+|\d+\.\d+E?\d+|\d+|[-+*/()]"""
+        expressionList = """(?<=^|[-*+/(])[+-]\d+\.\d+E?\d*|(?<=^|[-*+/(])[+-]\d+|\d+\.\d+E?\d*|\d+|[-+*/()]"""
                 .toRegex().findAll(equation).map { it.value }.toMutableList()
         removeHangingElements()
     }
 
     fun getResult(): String {
-        val postfixArray = getPostfix()
+
+        var postfixArray: MutableList<Any>
+        try {
+            postfixArray = getPostfix()
+        }catch (e:java.lang.NumberFormatException){
+            return "ERROR"
+        }
         val resultStack = mutableListOf<Double>()
 
         while (postfixArray.isNotEmpty()) {
@@ -59,8 +65,12 @@ class EquationSolver(private val equation: String) {
                     processStackElement(postfixStack, tempStack, expression)
                 }
                 "Int", "Double" -> {
-                    val convertedExp = expression.toDouble()
-                    processStackElement(postfixStack, convertedExp)
+                    try {
+                        val convertedExp = expression.toDouble()
+                        processStackElement(postfixStack, convertedExp)
+                    }catch (exception: NumberFormatException){
+                        throw exception
+                    }
                 }
             }
         }
@@ -79,7 +89,7 @@ class EquationSolver(private val equation: String) {
             "+", "-", "*", "/", "(", ")" -> return "String"
         }
         if (str.matches("""[+-]?\d+""".toRegex())) return "Int"
-        if (str.matches("""[+-]?\d+\.\d+E?\d+""".toRegex())) return "Double"
+        if (str.matches("""[+-]?\d+\.\d+E?\d*""".toRegex())) return "Double"
         return "Error"
     }
 
